@@ -9,9 +9,11 @@ public class IAMovement : MonoBehaviour
     private bool _isGoing = false;
     private int _whereToGo = 0;
     private float _offset = 0.5f;
+    private NavMeshAgent _agent;
 
     private void Start()
     {
+        _agent = GetComponent<NavMeshAgent>();
         WhereToGo();
     }
 
@@ -32,8 +34,7 @@ public class IAMovement : MonoBehaviour
     public void WhereToGo()
     {
         _whereToGo = Random.Range(0, _spawnPoints.Count);
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = _spawnPoints[_whereToGo].transform.position;
+        _agent.destination = _spawnPoints[_whereToGo].transform.position;
         _isGoing = true;
     }
 

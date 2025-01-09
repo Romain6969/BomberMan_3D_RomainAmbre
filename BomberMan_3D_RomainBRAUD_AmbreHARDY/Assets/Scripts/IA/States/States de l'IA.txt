@@ -1,0 +1,15 @@
+States de l'IA
+
+Recherche de bombes :
+	Il va chercher l'objet de bombe la plus proche de lui
+	Il va attaquer le joueur dès qu'il à le max de bombe possible/il n'y à plus de bombe sur la map
+	Il à une certaine chance d'attaquer si il est en dessous du nombre max/il reste des bombes sur la map
+
+Combat contre joueur :
+	Il va se diriger sur la position du joueur jusqu'à ce qu'il est assez proche pour poser une bombe
+
+S'enfuie d'une bombe :
+	Si il à une bombe proche de lui, il va se dirigé à l'opposer de cette bombe jusqu'à ce qu'il est en dehors de cette zone d'explosion
+	Il ne peut pas aller dans la zone d'explosion d'une bombe quand une bombe est placé
+Mort :
+	La partie se termine et le joueur gagne
