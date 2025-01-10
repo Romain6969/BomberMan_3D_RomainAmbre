@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FleeState : BaseIAState
 {
+    public List<GameObject> Bombs = new List<GameObject>();
+
+
     public override void OnEnter()
     {
 

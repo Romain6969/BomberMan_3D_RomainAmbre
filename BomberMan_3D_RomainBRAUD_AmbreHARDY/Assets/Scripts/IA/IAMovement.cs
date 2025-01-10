@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class IAMovement : MonoBehaviour
 {
-    [SerializeField]private List<GameObject> _spawnPoints = new List<GameObject>();
+    [SerializeField]private List<GameObject> _bombPoints = new List<GameObject>();
     private bool _isGoing = false;
     private int _whereToGo = 0;
     private float _offset = 0.5f;
@@ -14,6 +14,13 @@ public class IAMovement : MonoBehaviour
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        foreach (GameObject i in FindObjectsOfType<GameObject>())
+        {
+            if (i.tag == "SpawnPoints")
+            {
+                _bombPoints.Add(i);
+            }
+        }
         WhereToGo();
     }
 
@@ -21,10 +28,10 @@ public class IAMovement : MonoBehaviour
     {
         if (_isGoing == true)
         {
-            if (transform.position.x <= _spawnPoints[_whereToGo].transform.position.x + _offset && 
-                transform.position.x >= _spawnPoints[_whereToGo].transform.position.x - _offset && 
-                transform.position.z <= _spawnPoints[_whereToGo].transform.position.z + _offset && 
-                transform.position.z >= _spawnPoints[_whereToGo].transform.position.z - _offset)
+            if (transform.position.x <= _bombPoints[_whereToGo].transform.position.x + _offset && 
+                transform.position.x >= _bombPoints[_whereToGo].transform.position.x - _offset && 
+                transform.position.z <= _bombPoints[_whereToGo].transform.position.z + _offset && 
+                transform.position.z >= _bombPoints[_whereToGo].transform.position.z - _offset)
             {
                 WhereToGo();
             }
@@ -33,8 +40,8 @@ public class IAMovement : MonoBehaviour
 
     public void WhereToGo()
     {
-        _whereToGo = Random.Range(0, _spawnPoints.Count);
-        _agent.destination = _spawnPoints[_whereToGo].transform.position;
+        _whereToGo = Random.Range(0, _bombPoints.Count);
+        _agent.destination = _bombPoints[_whereToGo].transform.position;
         _isGoing = true;
     }
 

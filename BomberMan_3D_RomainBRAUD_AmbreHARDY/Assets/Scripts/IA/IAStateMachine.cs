@@ -29,7 +29,7 @@ public class IAStateMachine : MonoBehaviour
     }
 
 
-    public virtual void OnTransition(BaseIAState newState) 
+    public virtual void OnTransition(BaseIAState newState)
     {
         CurrentState = newState;
         InitialSate.OnExit();
@@ -39,21 +39,39 @@ public class IAStateMachine : MonoBehaviour
 
     private void Update()
     {
+        switch (CurrentState)
+        {
+            case SearchState:
+
+                break;
+            case DeadState:
+
+                break;
+            case AttackState:
+
+                break;
+            case FleeState:
+
+                break;
+        }
+
+        /*
         if (CurrentState == Search)
         {
 
         }
-        else if (CurrentState == Dead)
+        else if (CurrentState == Dead) 
         {
 
         }
-        else if (CurrentState == Attack)
+        else if (CurrentState == Attack) 
         {
 
         }
-        else if(CurrentState == Flee)
+        else if (CurrentState == Flee)
         {
 
         }
+        */
     }
 }
