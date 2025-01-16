@@ -6128,6 +6128,11 @@ GameObject:
   - component: {fileID: 1643636138}
   - component: {fileID: 1643636143}
   - component: {fileID: 1643636144}
+  - component: {fileID: 1643636145}
+  - component: {fileID: 1643636149}
+  - component: {fileID: 1643636148}
+  - component: {fileID: 1643636147}
+  - component: {fileID: 1643636146}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -6285,6 +6290,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bombPoints: []
+--- !u!114 &1643636145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643636137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e53325c5b6511428400501b836e9e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementIA: {fileID: 1643636144}
+--- !u!114 &1643636146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643636137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68df58252bcfdd44b8bc2caea73cdb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Search: {fileID: 1643636145}
+  Dead: {fileID: 1643636148}
+  Attack: {fileID: 1643636147}
+  Flee: {fileID: 1643636149}
+--- !u!114 &1643636147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643636137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224183b481b5ddc409cd77acbbda27e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1643636148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643636137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c95275750117a14aad98cfb791f66fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PanelWin: {fileID: 0}
+  PlayerMovement: {fileID: 0}
+--- !u!114 &1643636149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643636137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd303f07cf590b41ac4bbabb38c5fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bombs: []
 --- !u!1 &1660524002
 GameObject:
   m_ObjectHideFlags: 0
