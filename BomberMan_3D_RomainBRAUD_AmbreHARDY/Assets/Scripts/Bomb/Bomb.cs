@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+    [SerializeField] private GameObject _explosion;
+
     private void OnEnable()
     {
         StartCoroutine(Wait());
@@ -11,6 +13,8 @@ public class Bomb : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(3);
+        _explosion.SetActive(true);
+        yield return new WaitForSeconds(1);
 
         GameObject objectBomb = ObjectPoolObjectBomb.Instance.GetPooledObject();
 
@@ -19,6 +23,7 @@ public class Bomb : MonoBehaviour
             objectBomb.SetActive(true);
         }
 
+        _explosion.SetActive(false);
         gameObject.SetActive(false);
     }
 }

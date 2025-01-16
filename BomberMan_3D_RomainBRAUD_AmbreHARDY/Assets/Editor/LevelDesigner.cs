@@ -170,6 +170,6 @@ public class LevelDesigner : EditorWindow
 
     private void CleanNullReferences()
     {
-        _listBaseMap.RemoveAll(item => item == null);
+        _listBaseMap.RemoveAll(item => item = null);
     }
 }
