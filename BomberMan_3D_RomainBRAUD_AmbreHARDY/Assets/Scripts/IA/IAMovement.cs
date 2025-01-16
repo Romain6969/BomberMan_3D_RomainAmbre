@@ -10,9 +10,11 @@ public class IAMovement : MonoBehaviour
     private int _whereToGo = 0;
     private float _offset = 0.5f;
     private NavMeshAgent _agent;
+    private SearchState _searchState;
 
     private void Start()
     {
+        _searchState = GetComponent<SearchState>();
         _agent = GetComponent<NavMeshAgent>();
         foreach (GameObject i in FindObjectsOfType<GameObject>())
         {
@@ -21,7 +23,7 @@ public class IAMovement : MonoBehaviour
                 _bombPoints.Add(i);
             }
         }
-        WhereToGo();
+        IAStateMachine.Instance.OnTransition(_searchState);
     }
 
     private void FixedUpdate()

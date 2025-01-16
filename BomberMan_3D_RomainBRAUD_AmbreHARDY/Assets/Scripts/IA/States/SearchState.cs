@@ -13,6 +13,6 @@ public class SearchState : BaseIAState
 
     public override void OnExit()
     {
-
+        return;
     }
 }
