@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class FleeState : BaseIAState
 {
-    public List<GameObject> Bombs = new List<GameObject>();
-
+    public IAFlee IAFlee;
 
     public override void OnEnter()
     {
-
+        IAFlee.RunAway();
     }
 
     public override void OnExit()

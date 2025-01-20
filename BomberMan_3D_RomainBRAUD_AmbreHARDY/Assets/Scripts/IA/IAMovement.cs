@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,7 +17,7 @@ public class IAMovement : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         foreach (GameObject i in FindObjectsOfType<GameObject>())
         {
-            if (i.tag == "SpawnPoints")
+            if (i.tag == "ObjectBomb")
             {
                 _bombPoints.Add(i);
             }

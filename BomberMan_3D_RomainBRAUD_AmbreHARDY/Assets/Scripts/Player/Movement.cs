@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
     private float currentSpeed;
     [SerializeField] public Vector2 CurrentMovement { get; set; }
     [SerializeField] public bool IsMoving { get; set; } = true;
+    [SerializeField] public bool CanMove { get; set; } = true;
+
 
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -24,14 +26,17 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 mouvement = new Vector3(CurrentMovement.x, 0, CurrentMovement.y);
-        mouvement.Normalize();
-        transform.Translate(currentSpeed * mouvement * Time.fixedDeltaTime, Space.World);
-
-        if (mouvement != Vector3.zero)
+        if (CanMove)
         {
-            Quaternion toRotation = Quaternion.LookRotation(mouvement, Vector2.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720 * Time.fixedDeltaTime);
+            Vector3 mouvement = new Vector3(CurrentMovement.x, 0, CurrentMovement.y);
+            mouvement.Normalize();
+            transform.Translate(currentSpeed * mouvement * Time.fixedDeltaTime, Space.World);
+
+            if (mouvement != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(mouvement, Vector2.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720 * Time.fixedDeltaTime);
+            }
         }
     }
 
