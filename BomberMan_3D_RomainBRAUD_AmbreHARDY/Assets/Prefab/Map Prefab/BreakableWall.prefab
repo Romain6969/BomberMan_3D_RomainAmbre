@@ -2472,7 +2472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _listRigidBody: []
   _ciment: {fileID: 7643655370493354572}
-  _radiusDetection: {x: 0, y: 0, z: 0}
+  _radiusDetection: {x: 1, y: 1, z: 1}
   _radius: 2
   _force: 50
   _affectedLayers:
