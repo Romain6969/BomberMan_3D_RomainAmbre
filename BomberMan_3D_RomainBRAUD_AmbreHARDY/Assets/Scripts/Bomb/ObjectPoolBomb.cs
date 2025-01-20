@@ -5,7 +5,7 @@ public class ObjectPoolBomb : MonoBehaviour
 {
     public static ObjectPoolBomb Instance;
 
-    private List<GameObject> poolObjects = new List<GameObject>();
+    public List<GameObject> poolObjects = new List<GameObject>();
     [SerializeField] private int amountToPool;
 
     [SerializeField] private GameObject _prefab;

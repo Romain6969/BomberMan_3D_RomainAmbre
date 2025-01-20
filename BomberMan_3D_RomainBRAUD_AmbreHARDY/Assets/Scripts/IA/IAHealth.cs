@@ -7,15 +7,12 @@ public class IAHealth : MonoBehaviour
     [SerializeField] private DeadState _deadState;
     public int HP = 3;
 
-    public void IADamaged()
+    private void Update()
     {
-        if (HP > 0)
-        {
-            HP --;
-        }
-        else
+        if (HP <= 0)
         {
             IAStateMachine.Instance.OnTransition(_deadState);
+            HP = 3;
         }
     }
 
@@ -32,4 +29,13 @@ public class IAHealth : MonoBehaviour
         PlayerMovement.CanMove = false;
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Explosion")
+        {
+            HP--;
+        }
+    }
+
 }

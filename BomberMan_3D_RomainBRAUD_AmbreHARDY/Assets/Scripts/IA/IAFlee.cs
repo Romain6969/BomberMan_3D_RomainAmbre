@@ -5,28 +5,24 @@ using UnityEngine.AI;
 public class IAFlee : MonoBehaviour
 {
     private float _distanceBetweenBombIA = 4f;
-    private List<GameObject> _bombs = new List<GameObject>();
+    [SerializeField] private List<GameObject> _bombs = new List<GameObject>();
     private NavMeshAgent _agent;
     private GameObject _wichBomb = null;
     [SerializeField] private FleeState _fleeState;
+    private bool _checkBombs = true;
 
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        foreach (GameObject i in FindObjectsOfType<GameObject>())
-        {
-            if (i.tag == "Bomb")
-            {
-                _bombs.Add(i);
-            }
-        }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         float shortestDistance = 50f;
 
-        foreach (GameObject i in _bombs)
+        
+
+        foreach (GameObject i in ObjectPoolBomb.Instance.poolObjects)
         {
             if (shortestDistance > Vector3.Distance(transform.position, i.transform.position))
             {

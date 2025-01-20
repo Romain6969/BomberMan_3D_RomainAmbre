@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class IAAttack : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
-    [SerializeField] private UseBomb _createBomb;
     [SerializeField] private SearchState _searchState;
+    [SerializeField] private IAMovement _iaMovement;
     private NavMeshAgent _agent;
     public int _numBomb;
     private bool _canAttack = false;
@@ -15,16 +15,7 @@ public class IAAttack : MonoBehaviour
     
     private void Start()
     {
-        
         _agent = GetComponent<NavMeshAgent>();
-        foreach (GameObject i in FindObjectsOfType<GameObject>())
-        {
-            if (i.tag == "Player")
-            {
-                _player = i;
-                break;
-            }
-        }
     }
 
     public void Attacking()
@@ -43,15 +34,38 @@ public class IAAttack : MonoBehaviour
                 transform.position.z <= _player.transform.position.z + _offset &&
                 transform.position.z >= _player.transform.position.z - _offset)
             {
-                if (_numBomb > 0)
+                if (_iaMovement.NumberBomb > 0)
                 {
-                    _createBomb.Bomb();
+                    Bomb();
+                    StartCoroutine(Wait());
                 }
                 else
                 {
                     IAStateMachine.Instance.OnTransition(_searchState);
+                    _canAttack = false;
                 }
             }
         }
+    }
+
+    public void Bomb()
+    {
+
+        GameObject Bomb = ObjectPoolBomb.Instance.GetPooledObject();
+
+        if (Bomb != null)
+        {
+            Bomb.transform.position = transform.position;
+            Bomb.SetActive(true);
+        }
+        _iaMovement.NumberBomb--;
+    }
+
+
+        IEnumerator Wait()
+    {
+        _canAttack = false;
+        yield return new WaitForSeconds(1);
+        _canAttack = true;
     }
 }
