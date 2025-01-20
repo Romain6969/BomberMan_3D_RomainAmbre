@@ -3520,6 +3520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6acbf3f100fb00548b9011bce8f9c6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolObjects: []
   amountToPool: 5
   _prefab: {fileID: 2637807998830538465, guid: 84c20080f9eec7f4382dc4462eb371d7, type: 3}
 --- !u!114 &660224562
@@ -3534,6 +3535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0e9b8d79cbd3047b827e7efb3fff75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolObjects: []
   amountToPool: 5
   _prefab: {fileID: 153876636072761854, guid: ccaeb96ae2d3e674c9bf0e45bc99c77c, type: 3}
 --- !u!4 &660224563
@@ -5132,6 +5134,7 @@ MonoBehaviour:
   _panel: {fileID: 1928223728}
   _movement: {fileID: 1222133242}
   _useBomb: {fileID: 1222133241}
+  _invincibility: 0
 --- !u!114 &1222133240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6906,6 +6909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bombPoints: []
+  _objectBomb: {fileID: 660224561}
   NumberBomb: 0
 --- !u!114 &1643636145
 MonoBehaviour:
@@ -6987,6 +6991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0651a5d2a99a6074dace647c3468cce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bombs: []
   _fleeState: {fileID: 1643636149}
 --- !u!114 &1643636151
 MonoBehaviour:
@@ -7000,7 +7005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee8e4c1692cba64aac0833fca85c338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanelWin: {fileID: 0}
+  PanelWin: {fileID: 469284320}
   PlayerMovement: {fileID: 1222133242}
   _deadState: {fileID: 1643636148}
   HP: 3

@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class IAMovement : MonoBehaviour
 {
-    [SerializeField]private List<GameObject> _bombPoints = new List<GameObject>();
+    [SerializeField] private List<GameObject> _bombPoints = new List<GameObject>();
+    [SerializeField] private ObjectPoolObjectBomb _objectBomb;
     private bool _isGoing = false;
     private int _whereToGo = 0;
     private float _offset = 0.5f;
@@ -19,13 +20,6 @@ public class IAMovement : MonoBehaviour
         _searchState = GetComponent<SearchState>();
         _attackState = GetComponent<AttackState>();
         _agent = GetComponent<NavMeshAgent>();
-        foreach (GameObject i in FindObjectsOfType<GameObject>())
-        {
-            if (i.tag == "ObjectBomb")
-            {
-                _bombPoints.Add(i);
-            }
-        }
         IAStateMachine.Instance.OnTransition(_searchState);
     }
 
@@ -69,6 +63,14 @@ public class IAMovement : MonoBehaviour
 
     public void WhereToGo()
     {
+        _bombPoints = _objectBomb.poolObjects;
+        for (int index = 0; index < _bombPoints.Count; index ++)
+        {
+            if (_bombPoints[index].activeInHierarchy == false)
+            {
+                _bombPoints.Remove(_bombPoints[index]);
+            }
+        }
         _whereToGo = Random.Range(0, _bombPoints.Count);
         _agent.destination = _bombPoints[_whereToGo].transform.position;
         _isGoing = true;
