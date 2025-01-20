@@ -37,6 +37,11 @@ public class IAAttack : MonoBehaviour
                 if (_iaMovement.NumberBomb > 0)
                 {
                     Bomb();
+                    if (_iaMovement.NumberBomb <= 0)
+                    {
+                        IAStateMachine.Instance.OnTransition(_searchState);
+                        _canAttack = false;
+                    }
                     StartCoroutine(Wait());
                 }
                 else

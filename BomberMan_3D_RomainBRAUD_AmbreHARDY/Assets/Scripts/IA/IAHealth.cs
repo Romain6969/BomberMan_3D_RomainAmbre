@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class IAHealth : MonoBehaviour
@@ -35,7 +36,13 @@ public class IAHealth : MonoBehaviour
         if (other.tag == "Explosion")
         {
             HP--;
+            StartCoroutine(Wait());
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1);
     }
 
 }
