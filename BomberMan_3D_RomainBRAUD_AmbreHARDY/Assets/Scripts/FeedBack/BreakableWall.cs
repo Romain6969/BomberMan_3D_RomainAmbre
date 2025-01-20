@@ -11,12 +11,9 @@ public class BreakableWall : MonoBehaviour
     [SerializeField] private float _force;
     [SerializeField] private LayerMask _affectedLayers;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnEnable()
     {
-        if (other.tag == "Explosion")
-        {
-            OnExplosion();
-        }
+        OnExplosion();
     }
 
     public void OnExplosion()
@@ -27,8 +24,8 @@ public class BreakableWall : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject == this.gameObject) continue;
-            collider.gameObject.AddComponent<BoxCollider>();
             collider.gameObject.AddComponent<Rigidbody>();
+            collider.gameObject.AddComponent<BriqueDespawn>();
             Rigidbody rb = collider.GetComponent<Rigidbody>();
 
             if (rb != null)
