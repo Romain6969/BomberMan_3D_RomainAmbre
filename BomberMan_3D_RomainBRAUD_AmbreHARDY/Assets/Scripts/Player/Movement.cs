@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    [Header("Speed Settings")]
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _maxSpeed = 6;
     private float currentSpeed;

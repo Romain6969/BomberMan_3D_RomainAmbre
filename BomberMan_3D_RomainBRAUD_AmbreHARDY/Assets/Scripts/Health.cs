@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+using DG.Tweening;
+using UnityEngine.UI;
+
 public class Health : MonoBehaviour
 {
     [field: SerializeField] public int HP {  get; set; }
@@ -8,6 +11,8 @@ public class Health : MonoBehaviour
     [SerializeField] private Movement _movement;
     [SerializeField] private UseBomb _useBomb;
     [SerializeField] private bool _invincibility;
+    [SerializeField] private Image _healthImage;
+    [SerializeField] private AnimationCurve _curve;
 
     private void Update()
     {
@@ -30,6 +35,8 @@ public class Health : MonoBehaviour
         if (other.tag == "Explosion" && !_invincibility)
         {
             HP--;
+            float targetFillAmount = Mathf.InverseLerp(0, 3, HP);
+            _healthImage.DOFillAmount(targetFillAmount, 0.5f).SetEase(_curve);
             StartCoroutine(Wait());
         }
     }

@@ -8,7 +8,6 @@ public class ObjectCreatorModifierTests
     [SetUp]
     public void SetUp()
     {
-        // Configuration initiale
         objectCreatorModifier = new ObjectCreatorModifier
         {
             selectedIndex0 = 1, // Mode 3D
@@ -23,11 +22,9 @@ public class ObjectCreatorModifierTests
     [Test]
     public void TestCreateCube()
     {
-        // Act
         objectCreatorModifier.CreateObject();
         GameObject createdObject = GameObject.Find("Cube");
 
-        // Assert
         Assert.NotNull(createdObject);
         Assert.AreEqual(Vector3.one, createdObject.transform.localScale, "La taille de l'objet créé n'est pas correcte.");
     }
@@ -35,12 +32,10 @@ public class ObjectCreatorModifierTests
     [Test]
     public void TestCubeColor()
     {
-        // Act
         objectCreatorModifier.CreateObject();
         GameObject createdObject = GameObject.Find("Cube");
         Renderer renderer = createdObject.GetComponent<Renderer>();
 
-        // Assert
         Assert.NotNull(renderer, "Le Renderer de l'objet n'existe pas.");
         Assert.AreEqual(Color.red, renderer.sharedMaterial.color, "La couleur de l'objet créé n'est pas correcte.");
     }

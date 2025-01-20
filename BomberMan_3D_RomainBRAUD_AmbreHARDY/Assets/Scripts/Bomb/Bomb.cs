@@ -31,7 +31,7 @@ public class Bomb : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, _vector[i], out _hit, 2))
             {
-                if (_hit.collider.name == "BreakableWallFalse(Clone)")
+                if (_hit.collider.name == "BreakableWallFalse(Clone)"|| _hit.collider.name == "Player")
                 {
                     _listObject[i].SetActive(true);
                 }
@@ -42,7 +42,7 @@ public class Bomb : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         GameObject objectBomb = ObjectPoolObjectBomb.Instance.GetPooledObject();
 

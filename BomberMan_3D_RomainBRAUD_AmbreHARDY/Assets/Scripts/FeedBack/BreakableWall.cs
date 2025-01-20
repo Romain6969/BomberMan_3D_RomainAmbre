@@ -25,7 +25,6 @@ public class BreakableWall : MonoBehaviour
         {
             if (collider.gameObject == this.gameObject) continue;
             collider.gameObject.AddComponent<Rigidbody>();
-            collider.gameObject.AddComponent<BriqueDespawn>();
             Rigidbody rb = collider.GetComponent<Rigidbody>();
 
             if (rb != null)
