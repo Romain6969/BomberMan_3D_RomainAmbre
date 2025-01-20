@@ -1,10 +1,10 @@
 {
-    "name": "Tests",
+    "name": "General",
     "rootNamespace": "",
     "references": [
         "GUID:27619889b8ba8c24980f49ee34dbb44a",
-        "GUID:21b0c8d1703a94250bfac916590cea4f",
-        "GUID:0acc523941302664db1f4e527237feb3"
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:9916ccbe85acafd42887a5d787b81c88"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
