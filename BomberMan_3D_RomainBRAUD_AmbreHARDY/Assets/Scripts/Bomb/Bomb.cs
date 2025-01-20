@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour
 
     private void OnEnable()
     {
+        SpawnPointObjectBomb.Instance.ReplaceBomb(gameObject);
         StartCoroutine(Wait());
     }
 

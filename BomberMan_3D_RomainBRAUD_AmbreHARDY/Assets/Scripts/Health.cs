@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -6,6 +7,7 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject _panel;
     [SerializeField] private Movement _movement;
     [SerializeField] private UseBomb _useBomb;
+    [SerializeField] private bool _invincibility;
 
     private void Update()
     {
@@ -20,13 +22,22 @@ public class Health : MonoBehaviour
     {
         _movement.IsMoving = false;
         _useBomb.CanBomb = false;
+        _movement.CurrentMovement = new Vector2(0, 0);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Explosion")
+        if (other.tag == "Explosion" && !_invincibility)
         {
             HP--;
+            StartCoroutine(Wait());
         }
+    }
+
+    IEnumerator Wait()
+    {
+        _invincibility = true;
+        yield return new WaitForSeconds(3);
+        _invincibility = false;
     }
 }

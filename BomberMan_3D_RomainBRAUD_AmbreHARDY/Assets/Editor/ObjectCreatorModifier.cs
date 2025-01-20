@@ -1,6 +1,5 @@
 using System.IO;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class ObjectCreatorModifier : EditorWindow
@@ -146,7 +145,7 @@ public class ObjectCreatorModifier : EditorWindow
         }
     }
 
-    private void CreateObject()
+    public void CreateObject()
     {
         if (objectOptions0[selectedIndex0] == "3D")
         {

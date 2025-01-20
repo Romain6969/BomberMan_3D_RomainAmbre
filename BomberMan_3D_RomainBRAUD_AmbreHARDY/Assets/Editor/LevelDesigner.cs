@@ -110,8 +110,6 @@ public class LevelDesigner : EditorWindow
             GameObject instance = Instantiate(BreakableWallPrefab);
             instance.transform.position = _listBaseMap[choose].transform.position;
             instance.transform.parent = parentObject.transform;
-            DestroyImmediate(_listBaseMap[choose]);
-            _listBaseMap.RemoveAt(choose);
         }
 
         Debug.Log("Grid and walls generated successfully!");
