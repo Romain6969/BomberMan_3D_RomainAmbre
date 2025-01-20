@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,10 +11,13 @@ public class IAMovement : MonoBehaviour
     private float _offset = 0.5f;
     private NavMeshAgent _agent;
     private SearchState _searchState;
+    private AttackState _attackState;
+    public int NumberBomb = 0;
 
     private void Start()
     {
         _searchState = GetComponent<SearchState>();
+        _attackState = GetComponent<AttackState>();
         _agent = GetComponent<NavMeshAgent>();
         foreach (GameObject i in FindObjectsOfType<GameObject>())
         {
@@ -36,6 +40,30 @@ public class IAMovement : MonoBehaviour
             {
                 WhereToGo();
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "ObjectBomb" && NumberBomb < 3)
+        {
+            NumberBomb++;
+            other.gameObject.SetActive(false);
+            if (NumberBomb == 3)
+            {
+                IAStateMachine.Instance.OnTransition(_attackState);
+                return;
+            }
+            DoesAttackPlayer();
+        }
+    }
+
+    public void DoesAttackPlayer()
+    {
+        int chanceToGoAttack = Random.Range(0, 10);
+        if (chanceToGoAttack > 7 && NumberBomb < 3)
+        {
+            IAStateMachine.Instance.OnTransition(_attackState);
         }
     }
 

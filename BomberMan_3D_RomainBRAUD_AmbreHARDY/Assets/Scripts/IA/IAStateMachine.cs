@@ -39,6 +39,7 @@ public class IAStateMachine : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(CurrentState.ToString());
         switch (CurrentState)
         {
             case SearchState:
