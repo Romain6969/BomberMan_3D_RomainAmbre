@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
         {
             HP--;
             float targetFillAmount = Mathf.InverseLerp(0, 3, HP);
-            //_healthImage.DOFillAmount(targetFillAmount, 0.5f).SetEase(_curve);
+            _healthImage.DOFillAmount(targetFillAmount, 0.5f).SetEase(_curve);
             StartCoroutine(Wait());
         }
     }
