@@ -8115,7 +8115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1222133238}
   _searchState: {fileID: 1643636145}
-  _iaMovement: {fileID: 1643636144}
+  IaMovement: {fileID: 1643636144}
   _numBomb: 0
 --- !u!1 &1660524002
 GameObject:

@@ -7,7 +7,7 @@ public class IAAttack : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     [SerializeField] private SearchState _searchState;
-    [SerializeField] private IAMovement _iaMovement;
+    public IAMovement IaMovement;
     private NavMeshAgent _agent;
     public int _numBomb;
     private bool _canAttack = false;
@@ -34,10 +34,10 @@ public class IAAttack : MonoBehaviour
                 transform.position.z <= _player.transform.position.z + _offset &&
                 transform.position.z >= _player.transform.position.z - _offset)
             {
-                if (_iaMovement.NumberBomb > 0)
+                if (IaMovement.NumberBomb > 0)
                 {
                     Bomb();
-                    if (_iaMovement.NumberBomb <= 0)
+                    if (IaMovement.NumberBomb <= 0)
                     {
                         IAStateMachine.Instance.OnTransition(_searchState);
                         _canAttack = false;
@@ -63,7 +63,7 @@ public class IAAttack : MonoBehaviour
             Bomb.transform.position = transform.position;
             Bomb.SetActive(true);
         }
-        _iaMovement.NumberBomb--;
+        IaMovement.NumberBomb--;
     }
 
 
