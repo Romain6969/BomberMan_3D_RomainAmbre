@@ -15,7 +15,7 @@ public class IAAttack : MonoBehaviour
     public IAMovement IaMovement;
 
     [Header("Bomb UI")]
-    [SerializeField] private TMP_Text _textBomb;
+    [SerializeField] public TMP_Text _textBomb;
 
     private bool _canAttack = false;
     private float _offset = 2;
