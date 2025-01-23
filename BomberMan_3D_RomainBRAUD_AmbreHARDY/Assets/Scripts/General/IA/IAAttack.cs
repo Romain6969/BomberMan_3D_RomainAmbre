@@ -11,7 +11,7 @@ public class IAAttack : MonoBehaviour
     private NavMeshAgent _agent;
     public int _numBomb;
     private bool _canAttack = false;
-    private float _offset = 1;
+    private float _offset = 2;
     
     private void Start()
     {
@@ -36,7 +36,7 @@ public class IAAttack : MonoBehaviour
             {
                 if (IaMovement.NumberBomb > 0)
                 {
-                    Bomb();
+                    Bomb(IaMovement.NumberBomb);
                     if (IaMovement.NumberBomb <= 0)
                     {
                         IAStateMachine.Instance.OnTransition(_searchState);
@@ -53,7 +53,7 @@ public class IAAttack : MonoBehaviour
         }
     }
 
-    public void Bomb()
+    public void Bomb(int bombs)
     {
 
         GameObject Bomb = ObjectPoolBomb.Instance.GetPooledObject();
@@ -63,7 +63,7 @@ public class IAAttack : MonoBehaviour
             Bomb.transform.position = transform.position;
             Bomb.SetActive(true);
         }
-        IaMovement.NumberBomb--;
+        bombs--;
     }
 
 

@@ -13,11 +13,11 @@ public class BombNumbTest
         Bomb.AddComponent<IAAttack>();
         IAAttack attack = Bomb.GetComponent<IAAttack>();
 
-        attack.IaMovement.NumberBomb = 1;
+        int InitialNumberBomb = 1;
         int NumberBombLeft = 0;
 
         // -- Act --
-        attack.Bomb();
+        attack.Bomb(InitialNumberBomb);
         yield return new WaitForSeconds(1);
 
         // -- Assert --
