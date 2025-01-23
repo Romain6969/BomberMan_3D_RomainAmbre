@@ -5,16 +5,17 @@ using UnityEditor;
 using UnityEngine.VFX;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class VFXGetter : EditorWindow
 {
     public int Count = 0;
 
-    public string[] VFXNames = null;
+    public string[] VFXNames = new string[10];
+    public string[] Names = new string[2];
 
     public int Index = 0;
     public VisualEffect[] VFXs = null;
-
 
 
     [MenuItem("Window/MyWindow(Romain)/VFXGetter")]
@@ -41,19 +42,26 @@ public class VFXGetter : EditorWindow
 
     void OnGUI()
     {
+        VFXNames = SearchVFXNames();
         GUILayout.Label("Choose the VFX you want to create", EditorStyles.boldLabel);
         EditorGUILayout.Space();
-
 
         EditorGUILayout.Popup("Choose VFX", Index, VFXNames);
 
         if (GUILayout.Button("CREATE"))
         {
-
+            if (VFXNames[Index] == VFXNames[0])
+            {
+                Instantiate(SearchVFX(VFXNames[0]));
+            }
+            if (VFXNames[Index] == VFXNames[1])
+            {
+                Instantiate(SearchVFX(VFXNames[1]));
+            }
         }
     }
 
-    public VisualEffect SearchVFX(string name)
+    public VisualEffectAsset SearchVFX(string name)
     {
         string relativePath = "VFX";
         string fullPath = Path.Combine(Application.dataPath, relativePath);
@@ -64,7 +72,8 @@ public class VFXGetter : EditorWindow
             foreach (string file in files)
             {
                 string assetPath = "Assets" + file.Substring(Application.dataPath.Length).Replace("\\", "/");
-                VisualEffect vfx = AssetDatabase.LoadAssetAtPath<VisualEffect>(assetPath);
+                VisualEffectAsset vfx = AssetDatabase.LoadAssetAtPath<VisualEffectAsset>(assetPath);
+                
 
                 if (vfx != null && vfx.name == name)
                 {
@@ -84,24 +93,28 @@ public class VFXGetter : EditorWindow
 
     public string[] SearchVFXNames()
     {
+        Index = 0;
         string relativePath = "VFX";
         string fullPath = Path.Combine(Application.dataPath, relativePath);
-        string[] names = null;
 
         if (Directory.Exists(fullPath))
         {
             string[] files = Directory.GetFiles(fullPath, "*.vfx");
+            Names = new string[files.Length];
             foreach (string file in files)
             {
                 string assetPath = "Assets" + file.Substring(Application.dataPath.Length).Replace("\\", "/");
-                VisualEffect vfx = AssetDatabase.LoadAssetAtPath<VisualEffect>(assetPath);
+                VisualEffectAsset vfx = AssetDatabase.LoadAssetAtPath<VisualEffectAsset>(assetPath);
+                Debug.Log(assetPath);
 
                 if (vfx != null)
                 {
                     Debug.Log($"VFX trouvé : {vfx.name}");
-                    names[0] += vfx.name;
+                    Names[Index] += vfx.name;
+                    Index++;
                 }
             }
+            return Names;
         }
         else
         {
