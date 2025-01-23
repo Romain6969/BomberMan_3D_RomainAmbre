@@ -9,15 +9,19 @@ public class Bomb : MonoBehaviour
     [SerializeField] private List<GameObject> _listObject;
 
     private RaycastHit _hit;
+    private bool _explode = false;
 
-    private void OnEnable()
+    private void Awake()
     {
-        SpawnPointObjectBomb.Instance.ReplaceBomb(gameObject);
-
         _vector.Add(Vector3.forward);
         _vector.Add(Vector3.back);
         _vector.Add(Vector3.left);
         _vector.Add(Vector3.right);
+    }
+
+    private void OnEnable()
+    {
+        SpawnPointObjectBomb.Instance.ReplaceBomb(gameObject);
 
         StartCoroutine(Wait());
     }
@@ -26,12 +30,20 @@ public class Bomb : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
 
+        StartCoroutine(OnCheckCase());
+    }
+
+    IEnumerator OnCheckCase()
+    {
+        if (_explode) yield break;
+
+        _explode = true;
         _explosion.SetActive(true);
         for (int i = 0; i < 4; i++)
         {
             if (Physics.Raycast(transform.position, _vector[i], out _hit, 2))
             {
-                if (_hit.collider.name == "BreakableWallFalse(Clone)"|| _hit.collider.name == "Player")
+                if (_hit.collider.name == "BreakableWallFalse(Clone)" || _hit.collider.tag == "Player" || _hit.collider.tag == "Bomb" || _hit.collider.tag == "Explosion")
                 {
                     _listObject[i].SetActive(true);
                 }
@@ -42,7 +54,7 @@ public class Bomb : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         GameObject objectBomb = ObjectPoolObjectBomb.Instance.GetPooledObject();
 
@@ -61,5 +73,14 @@ public class Bomb : MonoBehaviour
 
         _explosion.SetActive(false);
         gameObject.SetActive(false);
+        _explode = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Explosion")
+        {
+            StartCoroutine(OnCheckCase());
+        }
     }
 }

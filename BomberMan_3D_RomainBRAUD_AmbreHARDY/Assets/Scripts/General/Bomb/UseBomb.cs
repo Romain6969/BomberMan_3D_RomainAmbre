@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +6,12 @@ public class UseBomb : MonoBehaviour
 {
     [field: SerializeField] public int NumberBomb {  get; set; }
     [field: SerializeField] public bool CanBomb { get; set; } = true;
+    [SerializeField] private TMP_Text _textBomb;
+
+    private void Update()
+    {
+        _textBomb.text = $"{NumberBomb}";
+    }
 
     public void OnUseBomb(InputAction.CallbackContext context)
     {

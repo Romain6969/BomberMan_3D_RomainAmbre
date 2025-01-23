@@ -145,6 +145,17 @@
                     "action": "Bomb",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1dc5b13-60b8-406e-9780-1f958af64973",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Bomb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

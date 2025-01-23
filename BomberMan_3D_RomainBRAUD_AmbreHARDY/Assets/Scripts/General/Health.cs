@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
     [SerializeField] private bool _invincibility;
     [SerializeField] private Image _healthImage;
     [SerializeField] private AnimationCurve _curve;
+    [SerializeField] private MeshRenderer _renderer;
 
     private void Update()
     {
@@ -43,7 +44,17 @@ public class Health : MonoBehaviour
     IEnumerator Wait()
     {
         _invincibility = true;
-        yield return new WaitForSeconds(3);
+        _renderer.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        _renderer.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        _renderer.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        _renderer.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        _renderer.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        _renderer.enabled = true;
         _invincibility = false;
     }
 }

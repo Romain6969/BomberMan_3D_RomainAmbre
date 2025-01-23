@@ -40,14 +40,11 @@ public class ObjectPoolBomb : MonoBehaviour
             {
                 return poolObjects[i];
             }
-            else
-            {
-                GameObject obj = Instantiate(_prefab);
-                obj.SetActive(false);
-                poolObjects.Add(obj);
-                return obj;
-            }
         }
-        return null;
+
+        GameObject obj = Instantiate(_prefab);
+        obj.SetActive(false);
+        poolObjects.Add(obj);
+        return obj;
     }
 }
