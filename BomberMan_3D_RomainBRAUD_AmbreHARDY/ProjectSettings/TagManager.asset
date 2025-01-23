@@ -8,6 +8,7 @@ TagManager:
   - SpawnPoints
   - Bomb
   - Explosion
+  - IA
   layers:
   - Default
   - TransparentFX

@@ -7,8 +7,10 @@ public class IAFlee : MonoBehaviour
     private float _distanceBetweenBombIA = 4f;
     private NavMeshAgent _agent;
     private GameObject _wichBomb = null;
-    [SerializeField] private FleeState _fleeState;
     private bool _checkBombs = false;
+
+    [Header("Etats")]
+    [SerializeField] private FleeState _fleeState;
     public virtual BaseIAState PreviousState { get; set; }
 
     private void Start()
@@ -16,7 +18,7 @@ public class IAFlee : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         float shortestDistance = 50f;
 
@@ -33,7 +35,7 @@ public class IAFlee : MonoBehaviour
 
         if (shortestDistance < _distanceBetweenBombIA && _wichBomb.activeInHierarchy == true)
         {
-            if (_checkBombs == false)
+            if (_checkBombs == false && PreviousState != _fleeState)
             {
                 PreviousState = IAStateMachine.Instance.CurrentState;
             }
@@ -41,10 +43,10 @@ public class IAFlee : MonoBehaviour
         }
         if (_checkBombs == true)
         {
-            if (shortestDistance > _distanceBetweenBombIA && _wichBomb.activeInHierarchy == true)
+            if (shortestDistance > _distanceBetweenBombIA + 1)
             {
-                IAStateMachine.Instance.OnTransition(PreviousState);
                 _checkBombs = false;
+                IAStateMachine.Instance.OnTransition(PreviousState);
             }
         }
     }
