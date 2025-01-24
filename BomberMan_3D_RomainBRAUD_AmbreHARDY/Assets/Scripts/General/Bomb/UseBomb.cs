@@ -7,8 +7,9 @@ public class UseBomb : MonoBehaviour
     [field: SerializeField] public int NumberBomb {  get; set; }
     [field: SerializeField] public bool CanBomb { get; set; } = true;
     [SerializeField] private TMP_Text _textBomb;
+    [SerializeField] private AudioSource _audioSource;
 
-    private void Update()
+    public void OnActualiseBomb()
     {
         _textBomb.text = $"{NumberBomb}";
     }
@@ -31,7 +32,9 @@ public class UseBomb : MonoBehaviour
         {
             Bomb.transform.position = transform.position;
             Bomb.SetActive(true);
+            _audioSource.Play();
         }
         NumberBomb--;
+        OnActualiseBomb();
     }
 }

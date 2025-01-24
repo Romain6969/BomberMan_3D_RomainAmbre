@@ -29,6 +29,9 @@ public class BreakableWall : MonoBehaviour
     public void OnExplosion()
     {
         _ciment.SetActive(false);
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        audio.volume = 0.1f;
+        audio.Play();
 
         Collider[] colliders = Physics.OverlapBox(transform.position, _radiusDetection, Quaternion.identity, _affectedLayers);
         foreach (Collider collider in colliders)
