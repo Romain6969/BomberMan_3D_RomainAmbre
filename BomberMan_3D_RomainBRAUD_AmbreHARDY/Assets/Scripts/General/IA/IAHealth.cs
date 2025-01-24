@@ -20,8 +20,9 @@ public class IAHealth : MonoBehaviour
     [Header("Invincibilité de l'IA")]
     [SerializeField] private bool _invincibility;
     [SerializeField] private MeshRenderer _renderer;
-    
 
+    [SerializeField] private AudioSource _audioSource;
+    
     private void Update()
     {
         if (HP <= 0)
@@ -50,6 +51,7 @@ public class IAHealth : MonoBehaviour
         if (other.tag == "Explosion" && !_invincibility)
         {
             HP--;
+            _audioSource.Play();
             float targetFillAmount = Mathf.InverseLerp(0, 3, HP);
             _healthImage.DOFillAmount(targetFillAmount, 0.5f).SetEase(_curve);
             StartCoroutine(Invicibility());

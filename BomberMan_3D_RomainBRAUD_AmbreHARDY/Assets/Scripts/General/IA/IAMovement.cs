@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,7 +19,12 @@ public class IAMovement : MonoBehaviour
     private NavMeshAgent _agent;
     private SearchState _searchState;
     private AttackState _attackState;
-    
+
+    private Vector3 _lastPosition;
+    private float _timeStuck = 0f;
+    private float _maxStuckTime = 3f;
+
+    [SerializeField] AudioSource _audioSource;
 
     private void Start()
     {
@@ -34,14 +38,30 @@ public class IAMovement : MonoBehaviour
     {
         if (_isGoing == true)
         {
-            if (transform.position.x <= _bombPoints[_whereToGo].transform.position.x + _offset && 
-                transform.position.x >= _bombPoints[_whereToGo].transform.position.x - _offset && 
-                transform.position.z <= _bombPoints[_whereToGo].transform.position.z + _offset && 
+            if (transform.position.x <= _bombPoints[_whereToGo].transform.position.x + _offset &&
+                transform.position.x >= _bombPoints[_whereToGo].transform.position.x - _offset &&
+                transform.position.z <= _bombPoints[_whereToGo].transform.position.z + _offset &&
                 transform.position.z >= _bombPoints[_whereToGo].transform.position.z - _offset)
             {
                 WhereToGo();
             }
         }
+
+        if (Vector3.Distance(transform.position, _lastPosition) < 0.1f)
+        {
+            _timeStuck += Time.deltaTime;
+            if (_timeStuck >= _maxStuckTime)
+            {
+                Debug.Log("IA bloquée");
+                WhereToGo();
+                _timeStuck = 0f;
+            }
+        }
+        else
+        {
+            _timeStuck = 0f;
+        }
+        _lastPosition = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +69,7 @@ public class IAMovement : MonoBehaviour
         if (other.tag == "ObjectBomb" && NumberBomb < 3)
         {
             NumberBomb++;
+            _audioSource.Play();
             other.gameObject.SetActive(false);
             if (NumberBomb == 3)
             {
@@ -71,7 +92,7 @@ public class IAMovement : MonoBehaviour
     public void WhereToGo()
     {
         _bombPoints = _objectBomb.poolObjects;
-        for (int index = 0; index < _bombPoints.Count; index ++)
+        for (int index = 0; index < _bombPoints.Count; index++)
         {
             if (_bombPoints[index].activeInHierarchy == false)
             {
@@ -82,5 +103,4 @@ public class IAMovement : MonoBehaviour
         _agent.destination = _bombPoints[_whereToGo].transform.position;
         _isGoing = true;
     }
-
 }

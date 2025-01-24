@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
-
 
 public class IAAttack : MonoBehaviour
 {
@@ -20,6 +18,7 @@ public class IAAttack : MonoBehaviour
     private bool _canAttack = false;
     private float _offset = 2;
     private NavMeshAgent _agent;
+    [SerializeField] private AudioSource _audioSource;
 
     private void Start()
     {
@@ -46,7 +45,7 @@ public class IAAttack : MonoBehaviour
                 if (IaMovement.NumberBomb > 0)
                 {
                     IaMovement.NumberBomb = Bomb(IaMovement.NumberBomb);
-                    if (Bomb(IaMovement.NumberBomb) <= 0)
+                    if (IaMovement.NumberBomb <= 0)
                     {
                         IAStateMachine.Instance.OnTransition(_searchState);
                         _canAttack = false;
@@ -64,19 +63,32 @@ public class IAAttack : MonoBehaviour
 
     public int Bomb(int bombs)
     {
-
         GameObject Bomb = ObjectPoolBomb.Instance.GetPooledObject();
 
         if (Bomb != null)
         {
-            Bomb.transform.position = transform.position;
+            Bomb.transform.position = PredictPlayerPosition();
             Bomb.SetActive(true);
+            _audioSource.Play();
         }
-        return bombs -=1;
+        return bombs -= 1;
     }
 
+    private Vector3 PredictPlayerPosition()
+    {
+        Vector3 playerVelocity = _player.GetComponent<Rigidbody>().velocity;
+        float predictionTime = 1.5f;
 
-        IEnumerator Wait()
+        Vector3 predictedPosition = _player.transform.position + playerVelocity * predictionTime;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(predictedPosition, out hit, 2.0f, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        return _player.transform.position;
+    }
+
+    IEnumerator Wait()
     {
         _canAttack = false;
         yield return new WaitForSeconds(1);
