@@ -5,15 +5,22 @@ using UnityEngine.AI;
 
 public class IAMovement : MonoBehaviour
 {
+    [Header("Listes")]
+    [Tooltip("La liste des points les plus proches de l'IA pour faire apparaitre les bombes")]
     [SerializeField] private List<GameObject> _bombPoints = new List<GameObject>();
     [SerializeField] private ObjectPoolObjectBomb _objectBomb;
+
+    [Header("Nombre Bombes")]
+    [Tooltip("Nombre de bombes que l'IA à sur lui entre 0 min et 3 max")]
+    public int NumberBomb = 0;
+
     private bool _isGoing = false;
     private int _whereToGo = 0;
     private float _offset = 0.5f;
     private NavMeshAgent _agent;
     private SearchState _searchState;
     private AttackState _attackState;
-    public int NumberBomb = 0;
+    
 
     private void Start()
     {

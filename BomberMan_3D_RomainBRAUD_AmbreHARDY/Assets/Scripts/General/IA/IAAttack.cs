@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
+
 
 public class IAAttack : MonoBehaviour
 {
+    [Header("Position du joueur")]
     [SerializeField] private GameObject _player;
+
+    [Header("Les Etats")]
     [SerializeField] private SearchState _searchState;
     public IAMovement IaMovement;
-    private NavMeshAgent _agent;
-    public int _numBomb;
+
+    [Header("Bomb UI")]
+    [SerializeField] public TMP_Text _textBomb;
+
     private bool _canAttack = false;
     private float _offset = 2;
-    
+    private NavMeshAgent _agent;
+
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -25,6 +33,7 @@ public class IAAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _textBomb.text = $"{IaMovement.NumberBomb}";
         if (_canAttack)
         {
             _agent.destination = _player.transform.position;
@@ -36,8 +45,8 @@ public class IAAttack : MonoBehaviour
             {
                 if (IaMovement.NumberBomb > 0)
                 {
-                    Bomb(IaMovement.NumberBomb);
-                    if (IaMovement.NumberBomb <= 0)
+                    IaMovement.NumberBomb = Bomb(IaMovement.NumberBomb);
+                    if (Bomb(IaMovement.NumberBomb) <= 0)
                     {
                         IAStateMachine.Instance.OnTransition(_searchState);
                         _canAttack = false;
@@ -53,7 +62,7 @@ public class IAAttack : MonoBehaviour
         }
     }
 
-    public void Bomb(int bombs)
+    public int Bomb(int bombs)
     {
 
         GameObject Bomb = ObjectPoolBomb.Instance.GetPooledObject();
@@ -63,7 +72,7 @@ public class IAAttack : MonoBehaviour
             Bomb.transform.position = transform.position;
             Bomb.SetActive(true);
         }
-        bombs--;
+        return bombs -=1;
     }
 
 

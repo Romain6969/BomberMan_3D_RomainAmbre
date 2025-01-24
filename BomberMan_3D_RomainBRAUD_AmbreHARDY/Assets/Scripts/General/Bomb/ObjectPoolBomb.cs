@@ -8,7 +8,7 @@ public class ObjectPoolBomb : MonoBehaviour
     public List<GameObject> poolObjects = new List<GameObject>();
     [SerializeField] private int amountToPool;
 
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] public GameObject Prefab;
 
     void Awake()
     {
@@ -26,7 +26,7 @@ public class ObjectPoolBomb : MonoBehaviour
     {
         for (int i = 0; i < amountToPool; i++)
         {
-            GameObject obj = Instantiate(_prefab);
+            GameObject obj = Instantiate(Prefab);
             obj.SetActive(false);
             poolObjects.Add(obj);
         }
@@ -42,7 +42,7 @@ public class ObjectPoolBomb : MonoBehaviour
             }
         }
 
-        GameObject obj = Instantiate(_prefab);
+        GameObject obj = Instantiate(Prefab);
         obj.SetActive(false);
         poolObjects.Add(obj);
         return obj;
