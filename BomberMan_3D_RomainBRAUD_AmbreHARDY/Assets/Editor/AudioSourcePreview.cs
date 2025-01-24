@@ -18,7 +18,7 @@ public class AudioSourcePreview : Editor
             }
             else
             {
-                Debug.LogWarning("Aucun clip audio assigné !");
+                Debug.LogWarning("Aucun clip");
             }
         }
     }

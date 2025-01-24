@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainGame.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Menu.unity
+    guid: 27ee0e5db5d384e41a6e97dc309447dd
+  - enabled: 1
+    path: Assets/Scenes/Ambre.unity
+    guid: 7a30912cdc48a2e4e8923423c3ed415a
+  - enabled: 1
+    path: Assets/Scenes/Romain.unity
+    guid: 2ff4c53aa3cb91f4099b72b351f60f40
   m_configObjects: {}
